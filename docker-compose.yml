@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  ktor-blog:
+    build: .
+    container_name: ktor-blog
+    networks:
+      - app-network
+
+  ktor-nginx:
+    image: nginx:stable-alpine
+    container_name: ktor-nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - ktor-blog
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
