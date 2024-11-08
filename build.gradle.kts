@@ -17,10 +17,12 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core:3.0.1")
-    implementation("io.ktor:ktor-server-netty:3.0.1")
+    implementation("io.ktor:ktor-server-core-jvm:2.3.4")
+    implementation("io.ktor:ktor-server-netty-jvm:2.3.4")
+    implementation("io.ktor:ktor-server-freemarker-jvm:2.3.4")
+    implementation("io.ktor:ktor-server-content-negotiation:2.3.4")
     implementation("ch.qos.logback:logback-classic:1.4.11")
-    testImplementation("io.ktor:ktor-server-tests:3.0.1")
+    testImplementation("io.ktor:ktor-server-tests-jvm:2.3.4")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.9.10")
 }
 

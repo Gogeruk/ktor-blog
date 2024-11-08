@@ -4,9 +4,8 @@
 Plauing around with ktor
 
 # to restart application and apply changes
-./gradlew clean
-./gradlew build
-docker-compose up --build
+./gradlew clean build
+docker-compose up -d --build
 
 # for dev
 # in application.conf do:
