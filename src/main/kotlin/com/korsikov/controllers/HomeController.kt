@@ -6,12 +6,19 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 
-fun Route.homeController() {
+fun Route.homeController(appEnv: String, appSecret: String) {
     get("/") {
-        call.respond(FreeMarkerContent("home.ftl", mapOf(
-            "title" to "Welcome Page",
-            "heading" to "Welcome to Ktor with FreeMarker!",
-            "message" to "This is a sample page using FreeMarker templating."
-        )))
+        call.respond(
+            FreeMarkerContent(
+                "base.ftl",
+                mapOf(
+                    "title" to "Welcome Base Page",
+                    "heading" to "Welcome to Ktor with FreeMarker!",
+                    "message" to "This is a sample page using FreeMarker templating.",
+                    "appEnv" to appEnv,
+                    "appSecret" to appSecret
+                )
+            )
+        )
     }
 }

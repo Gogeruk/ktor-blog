@@ -17,6 +17,7 @@ repositories {
 }
 
 dependencies {
+    implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
     implementation("io.ktor:ktor-server-core-jvm:2.3.4")
     implementation("io.ktor:ktor-server-netty-jvm:2.3.4")
     implementation("io.ktor:ktor-server-freemarker-jvm:2.3.4")

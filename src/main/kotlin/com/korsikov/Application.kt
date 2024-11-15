@@ -1,27 +1,26 @@
 package com.korsikov
 
-import com.korsikov.controllers.homeController
-import freemarker.cache.ClassTemplateLoader
+import io.github.cdimascio.dotenv.Dotenv
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.freemarker.FreeMarker
 import io.ktor.server.routing.routing
 import io.ktor.server.http.content.staticResources
+import com.korsikov.controllers.homeController
+import freemarker.cache.ClassTemplateLoader
 
 fun Application.module() {
+    // load environment variables
+    val dotenv = Dotenv.configure().ignoreIfMissing().load()
 
-    // install the FreeMarker plugin for templating
+    // install the FreeMarker plugin
     install(FreeMarker) {
-        templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
+        this.templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
     }
 
     // configure routing
     routing {
-        // configure static files routing
-        // maps /static path to resources/static folder
         staticResources("/static", "static")
-
-        // register controllers
-        homeController()
+        homeController(dotenv["APP_ENV"], dotenv["APP_SECRET"])
     }
 }
