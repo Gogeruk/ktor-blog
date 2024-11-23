@@ -5,18 +5,29 @@ import io.ktor.server.freemarker.FreeMarkerContent
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
+import kotlin.random.Random
 
-fun Route.homeController(appEnv: String, appSecret: String) {
+fun Route.homeController(
+    domainUrl: String,
+    blogEmail: String,
+    githubUrl: String
+) {
     get("/") {
+        val MIN_IMAGE_NUMBER = 1
+        val MAX_IMAGE_NUMBER = 135
+
+        val randomImageNumber = Random.nextInt(MIN_IMAGE_NUMBER, MAX_IMAGE_NUMBER + 1)
+        val formattedImageNumber = String.format("%03d", randomImageNumber)
+
         call.respond(
             FreeMarkerContent(
-                "base.ftl",
+                "home.ftl",
                 mapOf(
-                    "title" to "Welcome Base Page",
-                    "heading" to "Welcome to Ktor with FreeMarker!",
-                    "message" to "This is a sample page using FreeMarker templating.",
-                    "appEnv" to appEnv,
-                    "appSecret" to appSecret
+                    "title" to "Ktor TEST",
+                    "domainUrl" to domainUrl,
+                    "blogEmail" to blogEmail,
+                    "githubUrl" to githubUrl,
+                    "random" to formattedImageNumber
                 )
             )
         )
